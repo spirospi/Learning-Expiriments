@@ -1,11 +1,19 @@
+# Movie Success Prediction
+
+# 1. Import libraries
+
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
 
+# 2. Load Dataset
+
 credits = pd.read_csv("tmdb_5000_credits.csv")
 
 movies = pd.read_csv("tmdb_5000_movies.csv")
+
+# 3. Dataset Overview
 
 movies.head()
 
@@ -19,23 +27,31 @@ movies.columns
 
 credits.columns
 
+# 4. Merged Dataset
+
 movies_merged = movies.merge(credits,
                              left_on = "id",
                              right_on = "movie_id"
-                            )
+                          )
+
+
+# 5. Dataset Overview
 
 movies_merged.shape
-
 
 movies_merged.columns
 
 movies_merged.head()
+
+# 6. Data Types and Statistics
 
 movies_merged.dtypes
 
 movies_merged.describe
 
 movies_merged.isna()
+
+# 7. Missing Values
 
 movies_merged.isna().sum()
 
