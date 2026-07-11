@@ -20,6 +20,13 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
+from sklearn.model_selection import train_test_split
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.metrics import accuracy_score
+import ast
+from sklearn.metrics import classification_report
+from sklearn.metrics import confusion_matrix
+import joblib
 
 # 2. Load Dataset
 
@@ -180,4 +187,108 @@ movies_final = pd.concat([movies_merged, genres_encoded], axis=1)
 
 # .42 Dataset Overview
 movies_final.shape
+
+movies_final.columns
+
+# .43 Implementing Basic Features
+basic_features = ["budget","runtime","release_year"]
+
+# .44 Characteristics That Are Created From Genres
+genres_features = genres_encoded.columns.tolist()
+
+# .45 Combining The Two Lists
+all_features = basic_features + genres_features
+
+# 46 Setting Up X and y
+X = movies_final[all_features]
+y = movies_final["is_successful"]
+
+# .47 Checking Shapes Of X
+X.shape
+
+# .48 Checking Shapes Of y
+y.shape
+
+# .49 Ckecking X 
+X.head
+
+# .50 Checjing X
+X.columns
+
+# .51 Checking X Shape
+X.shape
+
+# .52 Length Of Genres Feature
+len(genres_features)
+
+# .53 Train_test_split The New Features
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+# .54 Quick Check Of all X and y
+X_train.shape
+
+X_test.shape
+
+y_train.shape
+
+y_test.shape
+
+# .55 Create The Model 
+clf_model_v2 = RandomForestClassifier()
+
+# .56 Training
+clf_model_v2.fit(X_train,y_train)
+
+# .57 Prediction
+y_pred_new = clf_model_v2.predict(X_test)
+
+# .58 Score
+new_score = accuracy_score(y_test,y_pred_new)
+print(new_score)
+
+# .59 Checking Why It Makes This Predictions
+y.value_counts()
+
+# .60 Classification Report
+classification_report(y_test,y_pred_new)
+
+# .61 See Classification Report More Clearly
+print(classification_report(y_test,y_pred_new))
+
+# .62 Create Confusion Matrix
+cm = confusion_matrix(y_test,y_pred_new)
+
+# .63 See Confusion Matrix 
+cm
+
+# .64 A Number For Every Feature
+clf_model_v2.feature_importances_
+
+# .65 Connecting With Our Columns all_feature
+feature_importance = pd.DataFrame({
+    "feature": all_features,
+    "importance":
+    clf_model_v2.feature_importances_
+})
+
+feature_importance.sort_values(
+    by = "importance",
+    ascending = False
+)
+
+# .66 Quick Ckeck Of feature_importance
+feature_importance.head(10)
+
+# .67 Ckecking The Genres Meaning Categories
+feature_importance[feature_importance["feature"].isin(genres_features)]
+
+# .68 Save Model
+
+# Save Model In File 
+joblib.dump(clf_model_v2, "movie_profit_predictor.pkl")
+
+# Load Model (To A Difeerent, Empty Script)
+loaded_model = joblib.load("movie_profit_predictor.pkl")
+
+
 
