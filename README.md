@@ -1,5 +1,5 @@
 
-# First end-to-end Machine Learning project using the TMDB 5000 Dataset. The project covers data cleaning, feature engineering, feature encoding and a Random Forest classifier for movie success prediction.
+First end-to-end Machine Learning project using the TMDB 5000 Dataset. The project covers data cleaning, feature engineering, feature encoding and a Random Forest classifier for movie success prediction.
 
 
 # Learning-Expiriments
