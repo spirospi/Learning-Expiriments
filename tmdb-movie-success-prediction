@@ -290,5 +290,22 @@ joblib.dump(clf_model_v2, "movie_profit_predictor.pkl")
 # Load Model (To A Difeerent, Empty Script)
 loaded_model = joblib.load("movie_profit_predictor.pkl")
 
+# Mini Deployment
+
+# .69 We Create A Line Full Of 0 Using The Same Columns Of Train Set
+new_data = pd.DataFrame(0, index=[0], columns=X_train.columns)
+
+# .70 Filling The Exactly Values For The Information Of The New Movie
+new_data["budget"] = 80_000_000
+new_data["runtime"] = 125
+new_data["release_year"] = 2026
+new_data["Action"] = 1
+
+# 3. Prediction From The Ready Model
+prediction = loaded_model.predict(new_data)
+
+# Print Prediction
+print(prediction)
+
 
 
