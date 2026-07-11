@@ -1,3 +1,17 @@
+Project Workflow
+
+1. Import Libraries
+2. Load Datasets
+3. Merge Datasets
+4. Initial Data Exploration
+5. Data Cleaning
+6. Feature Engineering
+7. Feature Encoding
+8. Feature Selection
+9. Train/Test Split
+10. Model Training
+11. Model Evaluation
+
 # Movie Success Prediction
 
 # 1. Import libraries
@@ -54,4 +68,116 @@ movies_merged.isna()
 # 7. Missing Values
 
 movies_merged.isna().sum()
+
+# 8. If Movie Id and Id are the same
+(movies_merged["id"] == movies_merged["movie_id"]).all()
+
+# 9. Drop Movie Id 
+movies_merged = movies_merged.drop("movie_id",axis=1)
+
+# 10. Data Overview
+movies_merged.columns
+
+movies_merged.shape
+
+# 11. Check for Duplicated Rows
+movies_merged.duplicated().sum()
+
+# 12. Check for Missing Values
+
+movies_merged.isna().sum(axis=0)
+
+# .13 Drop 2 Columns
+movies_merged = movies_merged.drop(["homepage", "tagline"], axis=1)
+
+# .14 Drop 2 Rows
+movies_merged = movies_merged.dropna(subset=["overview", "runtime"])
+
+# .15 Summary
+movies_merged.isna().sum()
+
+# .16 Checking Indivual Column 
+movies_merged[movies_merged["release_date"].isna()]
+
+# .17 Drop Column
+movies_merged = movies_merged.dropna(subset=["release_date"])
+
+# .18 Summary
+movies_merged.isna().sum()
+
+# .19 Checking Data Types
+movies_merged.dtypes
+
+# .20 Convert
+movies_merged["release_date"] = pd.to_datetime(movies_merged["release_date"])
+
+# .21 Checking Data Types
+movies_merged.dtypes
+
+# .22 Create New Column
+movies_merged["release_year"] = movies_merged["release_date"].dt.year
+
+# .23 Checking The Corrections
+movies_merged[["release_date", "release_year"]].head()
+
+# .24 Creating and conversion of A New Column
+movies_merged["is_successful"] = (movies_merged["revenue"] > movies_merged["budget"]).astype(int)
+
+# .25 Overview
+movies_merged[['budget', 'revenue', 'is_successful']].head()
+
+# .26 Define X and y
+X = movies_merged[["budget", "runtime"]]
+y = movies_merged["is_successful"]
+
+# .27 Split The Model
+X_train, X_test,y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+# .28 Create The Model
+clf_model = RandomForestClassifier()
+
+# .29 Training
+clf_model.fit(X_train,y_train)
+
+# .30 Prediction
+y_pred = clf_model.predict(X_test)
+
+#  .31 Score
+score = accuracy_score(y_test, y_pred)
+print(score)
+
+# .32 Convertion Of Text
+def extract_genres(text):
+    # Converting String Into list
+    actual_list = ast.literal_eval(text)
+    
+    # .33 Keeping only The Name from Every Element
+    names_only = [item['name'] for item in actual_list]
+    
+    # .34 It Joins them in a text Separated with Commas
+    return ", ".join(names_only)
+
+# .35 Application In The Function with.apply()
+movies_merged["genres"] = movies_merged["genres"].apply(extract_genres)
+
+# .36 Dataset Overview
+movies_merged["genres"].head()
+
+# .37 Conversion to 0,1
+movies_encoded = pd.get_dummies(movies_merged, columns=["genres"], dtype=int)
+
+# .38 Data Overview
+movies_encoded.shape
+
+# .39 Checking Columns 
+movies_encoded.columns
+
+# .40 Clearly Seperation 
+genres_encoded = movies_merged["genres"].str.get_dummies(sep=", ")
+
+# .41 We Connect Them to Our Original dataset
+movies_final = pd.concat([movies_merged, genres_encoded], axis=1)
+
+# .42 Dataset Overview
+movies_final.shape
 
