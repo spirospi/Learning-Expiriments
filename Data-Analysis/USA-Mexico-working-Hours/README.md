@@ -1,6 +1,6 @@
 #Headline
 
-First EDA project using the USA + Mexico hours dataset.The project covers basic EDA
+First EDA project using the USA + Mexico hours dataset.The project covers basic EDA.
 
 Step 1: We import the csv file,we use head to see the first 5 rows
 
