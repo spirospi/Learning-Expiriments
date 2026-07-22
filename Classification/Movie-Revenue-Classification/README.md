@@ -11,3 +11,13 @@ Why is interesting : to see how and why and predict why a movie is succesful usi
 Approach : I approached and decided that i will use the method of classification
 
 A baseline model was created using basic numerical features. A second model was trained using additional engineered features including release year and genres.
+
+
+## Future Improvements
+
+- [ ] Compare additional machine learning models.
+- [ ] Improve feature engineering.
+- [ ] Perform hyperparameter tuning.
+- [ ] Build a preprocessing pipeline.
+- [ ] Improve model evaluation.
+- [ ] Deploy the model with an API.
