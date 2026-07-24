@@ -1,23 +1,48 @@
-#Headline
+# Movie Revenue Classification
 
-First end-to-end Machine Learning project using the TMDB 5000 Dataset. The project covers data cleaning, feature engineering, feature encoding and a Random Forest classifier for movie success prediction.
+## Overview
 
-#Learning-Expiriments
+First end-to-end Machine Learning project using the TMDB 5000 Movies Dataset.
 
-What are we trying to solve : to guess if a movie is successful based on their revenue
+The goal of this project is to predict whether a movie is successful based on its revenue using machine learning techniques.
 
-Why is interesting : to see how and why and predict why a movie is succesful using machine learning systems
+The project covers:
+- Data cleaning
+- Feature engineering
+- Feature encoding
+- Model training
+- Model evaluation
 
-Approach : I approached and decided that i will use the method of classification
+## Problem Definition
 
-A baseline model was created using basic numerical features. A second model was trained using additional engineered features including release year and genres.
+### What are we trying to solve?
 
+Predict whether a movie will be successful based on available movie features.
+
+### Why is this interesting?
+
+The goal is to explore which factors can influence movie success and how machine learning models can be used for prediction.
+
+## Approach
+
+The problem was formulated as a binary classification task.
+
+A baseline model was created using basic numerical features.
+
+A second approach included additional engineered features such as:
+- Release year
+- Genres
+
+## Model
+
+- Random Forest Classifier
 
 ## Future Improvements
 
-- [ ] Compare additional machine learning models.
-- [ ] Improve feature engineering.
-- [ ] Perform hyperparameter tuning.
-- [ ] Build a preprocessing pipeline.
-- [ ] Improve model evaluation.
-- [ ] Deploy the model with an API.
+Possible improvements:
+- Compare additional machine learning models
+- Improve feature engineering
+- Perform hyperparameter tuning
+- Build a preprocessing pipeline
+- Improve evaluation metrics
+- Deploy the model through an API
