@@ -1,1 +1,3 @@
-This is my Learning-expiriment space.Where i do expiriments in different projects and explore what i like.
+# Learning Experiments
+
+This is my learning experiment space, where I experiment with different projects, learn new concepts, and explore what I like.
